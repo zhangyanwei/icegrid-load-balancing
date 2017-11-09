@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- This file was written by IceGrid GUI -->
+<icegrid>
+   <application name="PrinterApplication">
+      <server-template id="PrinterServerTemplate">
+         <parameter name="index"/>
+         <parameter name="port"/>
+         <server id="PrinterServer-${index}" activation="on-demand" exe="java" user="ice">
+            <option>-jar</option>
+            <option>/var/lib/ice/icegrid/server.jar</option>
+            <properties>
+               <property name="Identity" value="Printer"/>
+            </properties>
+            <adapter name="PrinterAdapter" endpoints="tcp -p ${port}" id="${server}.PrinterAdapter" replica-group="PrinterAdapter"/>
+         </server>
+      </server-template>
+      <replica-group id="PrinterAdapter">
+         <load-balancing type="ordered" n-replicas="0"/>
+         <object identity="Printer" type="::demo::Printer"/>
+      </replica-group>
+      <node name="node1">
+         <server-instance template="PrinterServerTemplate" index="1" port="5061"/>
+      </node>
+      <node name="node2">
+         <server-instance template="PrinterServerTemplate" index="2" port="5062"/>
+      </node>
+   </application>
+</icegrid>

@@ -1,0 +1,16 @@
+# Configuration file (11/09/17 10:00:20.010)
+
+# Server configuration
+Ice.Admin.ServerId=PrinterServer-1
+Ice.Admin.Endpoints=tcp -h localhost
+Ice.ProgramName=PrinterServer-1
+# Object adapter PrinterAdapter
+PrinterAdapter.Endpoints=tcp -p 5061
+PrinterAdapter.AdapterId=PrinterServer-1.PrinterAdapter
+PrinterAdapter.ReplicaGroupId=PrinterAdapter
+# Server descriptor properties
+PrinterAdapter.PublishedEndpoints=tcp -h localhost -p 5061
+Identity=Printer
+Ice.StdErr=/var/lib/ice/icegrid/data/node-1/PrinterServer-1.err
+Ice.StdOut=/var/lib/ice/icegrid/data/node-1/PrinterServer-1.out
+Ice.Default.Locator=PrinterIceGrid/Locator:tcp -h localhost -p 4061
