@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- This file was written by IceGrid GUI -->
+<icegrid>
+   <application name="PrinterApplication">
+      <server-template id="PrinterServerTemplate">
+         <parameter name="index"/>
+         <server id="PrinterServer-${index}" activation="on-demand" exe="java">
+            <option>-jar</option>
+            <option>${node.data}\server.jar</option>
+            <properties>
+               <property name="Identity" value="Printer"/>
+               <property name="Ice.Default.Locator" value="PrinterIceGrid/Locator:ssl -h localhost -p 4062"/>
+               <property name="Ice.Plugin.IceSSL" value="IceSSL:com.zeroc.IceSSL.PluginFactory"/>
+               <property name="IceSSL.DefaultDir" value="${node.data}\certs"/>
+               <property name="IceSSL.Keystore" value="server.jks"/>
+               <property name="IceSSL.Truststore" value="ca.jks"/>
+               <property name="IceSSL.Password" value="password"/>
+               <property name="IceSSL.Trace.Security" value="1"/>
+            </properties>
+            <adapter name="PrinterAdapter" endpoints="ssl" id="${server}.PrinterAdapter" replica-group="PrinterAdapter"/>
+         </server>
+      </server-template>
+      <replica-group id="PrinterAdapter">
+         <load-balancing type="ordered" n-replicas="0"/>
+         <object identity="Printer" type="::demo::Printer"/>
+      </replica-group>
+      <node name="node1">
+         <server-instance template="PrinterServerTemplate" index="1"/>
+      </node>
+      <node name="node2">
+         <server-instance template="PrinterServerTemplate" index="2"/>
+      </node>
+   </application>
+</icegrid>
