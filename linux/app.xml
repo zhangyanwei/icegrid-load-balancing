@@ -10,8 +10,16 @@
             <option>/var/lib/ice/icegrid/server.jar</option>
             <properties>
                <property name="Identity" value="Printer"/>
+               <property name="PrinterAdapter.PublishedEndpoints" value="ssl -h localhost -p ${port}"/>
+               <property name="Ice.Default.Locator" value="PrinterIceGrid/Locator:ssl -h localhost -p 4062"/>
+               <property name="Ice.Plugin.IceSSL" value="IceSSL:com.zeroc.IceSSL.PluginFactory"/>
+               <property name="IceSSL.DefaultDir" value="/var/lib/ice/icegrid/certs"/>
+               <property name="IceSSL.Keystore" value="server.jks"/>
+               <property name="IceSSL.Truststore" value="ca.jks"/>
+               <property name="IceSSL.Password" value="password"/>
+               <property name="IceSSL.Trace.Security" value="1"/>
             </properties>
-            <adapter name="PrinterAdapter" endpoints="tcp -p ${port}" id="${server}.PrinterAdapter" replica-group="PrinterAdapter"/>
+            <adapter name="PrinterAdapter" endpoints="ssl -p ${port}" id="${server}.PrinterAdapter" replica-group="PrinterAdapter"/>
          </server>
       </server-template>
       <replica-group id="PrinterAdapter">

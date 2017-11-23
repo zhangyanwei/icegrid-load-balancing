@@ -8,6 +8,7 @@ FOR /L %%G IN (1,1,10) DO java -jar client.jar ^
     "--IceSSL.Truststore=ca.jks" ^
     "--IceSSL.Password=password" ^
     "--IceSSL.Trace.Security=1" ^
-    "--Ice.Trace.Locator=1"
+    "--Ice.Trace.Locator=1" ^
+    "-Message=Index: %%G, Hello !"
 
 PAUSE

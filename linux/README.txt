@@ -4,7 +4,7 @@
 2. 命令行进行docker目录，创建docker镜像
    docker build -t icegrid .
 3. 创建icegrid的docker容器
-   docker run --rm -d -p 4061:4061 -p 5061:5061 -p 5062:5062 -v c:/docker/linux:/var/lib/ice/icegrid icegrid
+   docker run --rm -d -p 4062:4062 -p 4063:4063 -p 5061:5061 -p 5062:5062 -v C:\workspace\icegrid-load-balancing:/var/lib/ice/icegrid icegrid
 4. 使用windows的 icegridadmin.exe 以图形化方式打开icegrid管理工具
 5. 通过工具发布 app.xml 
 6. 运行 client.bat 进行测试
